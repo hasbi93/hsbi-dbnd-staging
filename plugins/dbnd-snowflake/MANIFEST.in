@@ -1,0 +1,10 @@
+include LICENSE *.md *.toml
+
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .ipynb_checkpoints
+
+exclude tox.ini
+prune tests
+prune deprecated

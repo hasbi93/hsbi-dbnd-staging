@@ -1,0 +1,45 @@
+FROM python:3.8
+
+USER root
+RUN apt-get update
+RUN apt-get install -y gcc unzip vim
+
+COPY ./plugins /dbnd/plugins/
+COPY ./modules /dbnd/modules/
+COPY ./examples /dbnd/examples/
+
+COPY ./setup.cfg /dbnd/modules/dbnd/setup.cfg
+COPY ./setup.cfg /dbnd/modules/dbnd-airflow/setup.cfg
+COPY ./setup.cfg /dbnd/examples/setup.cfg
+COPY ./setup.cfg /dbnd/plugins/*/setup.cfg
+
+# COPY ./project.cfg /dbnd/
+COPY ./orchestration/dbnd-run/src/dbnd_run/conf/project_init/project.cfg /dbnd/
+
+# RUN pip install pip==21.3.1  # python 3.6
+RUN pip install pip==23.3.2  # python 3.6
+
+# Pre-install Airflow with correct deps
+ARG AIRFLOW_VERSION=1.10.15
+RUN SHORT_PYTHON_VERSION=$(echo ${PYTHON_VERSION} | cut -f1,2 -d'.') && \
+    pip install apache-airflow[postgres]==$AIRFLOW_VERSION \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${SHORT_PYTHON_VERSION}.txt"
+
+RUN pip install -e /dbnd/modules/dbnd
+RUN pip install -e /dbnd/modules/dbnd-airflow
+RUN pip install -e /dbnd/examples
+# RUN pip install -e /dbnd/plugins/dbnd-aws
+# RUN pip install -e /dbnd/plugins/dbnd-docker
+# RUN pip install -e /dbnd/plugins/dbnd-airflow-auto-tracking
+# RUN pip install -e /dbnd/plugins/dbnd-airflow-export
+# RUN pip install -e /dbnd/plugins/dbnd-luigi
+# RUN pip install -e /dbnd/plugins/dbnd-mlflow
+# RUN pip install -e /dbnd/plugins/dbnd-postgres
+# RUN pip install -e /dbnd/plugins/dbnd-redshift
+# RUN pip install -e /dbnd/plugins/dbnd-snowflake
+# RUN pip install -e /dbnd/plugins/dbnd-tensorflow
+
+WORKDIR /dbnd
+
+# ENTRYPOINT "/bin/bash"
+ENTRYPOINT ["/bin/bash"]

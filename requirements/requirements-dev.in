@@ -1,0 +1,16 @@
+-r ./requirements-dev-tools.in
+
+# Add all the requirements for the dbnd and dbnd modules
+
+# databand:
+-e file:modules/dbnd
+
+# databand tracking monitors:
+-e file:modules/dbnd-airflow-monitor
+
+# databand tracking
+-e file:plugins/dbnd-mlflow
+-e file:plugins/dbnd-postgres
+-e file:plugins/dbnd-snowflake
+-e file:plugins/dbnd-redshift
+

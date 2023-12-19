@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> ca7a7da1889e4feb4e9ec261b892392e7320655b
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -186,7 +190,11 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
+<<<<<<< HEAD
    Copyright [yyyy] [name of copyright owner]
+=======
+   Copyright 2019 DATABAND.AI, Ltd
+>>>>>>> ca7a7da1889e4feb4e9ec261b892392e7320655b
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
