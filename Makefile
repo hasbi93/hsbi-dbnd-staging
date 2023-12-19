@@ -250,3 +250,9 @@ tracking-airflow--install-dev: __is_venv_activated__tracking_airflow  ## Install
 tracking-airflow--pip-compile: __is_venv_activated__tracking_airflow  ## Regenerate deps and constrains
 	pip-compile -v --resolver backtracking requirements/requirements-dev-tracking-airflow.in \
 	    -o ${REQUIREMENTS_FILE_TRACKING_AIRFLOW}
+
+# Makefile
+
+.PHONY: build run stop
+
+include docker-makefile.mk
